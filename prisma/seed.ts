@@ -15,7 +15,7 @@ async function main() {
       image: "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg",
       category: "Gaming Accessories",
       variants: ["Black/Red", "White/Blue"],
-      available: false, // Turn true will change the mark "in Stock" to "Out of Stock"!
+      available: true,
     },
   });
 
