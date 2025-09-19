@@ -3,19 +3,23 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // Create a single demo product for the challenge
+  // Clean current data (safe for local/demo)
+  await prisma.product.deleteMany();
+
+  // Single, game-related demo product
   await prisma.product.create({
     data: {
       name: "Gaming Headset Pro",
       price: 89.99,
-      image: "https://picsum.photos/seed/gamingheadset/600/400",
+      // Stable demo image (Picsum)
+      image: "https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg",
       category: "Gaming Accessories",
       variants: ["Black/Red", "White/Blue"],
-      available: true,
+      available: false, // Turn true will change the mark "in Stock" to "Out of Stock"!
     },
   });
 
-  console.log("🌱 Demo product created successfully!");
+  console.log("🌱 Seed completed: 1 demo product inserted.");
 }
 
 main()
@@ -23,6 +27,6 @@ main()
     console.error(e);
     process.exit(1);
   })
-  .finally(async () => {
-    prisma.$disconnect();
-  });
+  .finally(() => prisma.$disconnect());
+
+
